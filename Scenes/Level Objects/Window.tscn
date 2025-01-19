@@ -1,0 +1,39 @@
+[gd_scene load_steps=6 format=3 uid="uid://e116n1oyu23p"]
+
+[ext_resource type="Material" uid="uid://bdo6qj353f2ju" path="res://Assets/white.tres" id="1_mf8kc"]
+
+[sub_resource type="BoxMesh" id="BoxMesh_jusfb"]
+size = Vector3(1, 2, 10)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_kygi2"]
+size = Vector3(1, 2, 10)
+
+[sub_resource type="BoxMesh" id="BoxMesh_75wlq"]
+size = Vector3(1, 2, 10)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_q6p33"]
+size = Vector3(1, 2, 10)
+
+[node name="Window" type="Node3D"]
+
+[node name="Wall4" type="MeshInstance3D" parent="."]
+transform = Transform3D(-4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, 0, 4.03267, 0)
+material_override = ExtResource("1_mf8kc")
+mesh = SubResource("BoxMesh_jusfb")
+skeleton = NodePath("../../..")
+
+[node name="StaticBody3D" type="StaticBody3D" parent="Wall4"]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Wall4/StaticBody3D"]
+shape = SubResource("BoxShape3D_kygi2")
+
+[node name="Wall3" type="MeshInstance3D" parent="."]
+transform = Transform3D(-4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, 0, 0, 0)
+material_override = ExtResource("1_mf8kc")
+mesh = SubResource("BoxMesh_75wlq")
+skeleton = NodePath("../../..")
+
+[node name="StaticBody3D" type="StaticBody3D" parent="Wall3"]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Wall3/StaticBody3D"]
+shape = SubResource("BoxShape3D_q6p33")
