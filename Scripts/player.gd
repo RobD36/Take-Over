@@ -96,7 +96,9 @@ func _take_over():
 				
 				# Delete target and place new one at old position
 				collider.queue_free()
-				#_spawn_takeable(old_position)
+				
+				# Commment out if you want infinite gameplay V
+				_spawn_takeable(old_position)
 				
 				# Start the takeover timer from the GameManager
 				game_manager.start_takeover_timer()
