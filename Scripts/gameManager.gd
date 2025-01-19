@@ -2,20 +2,29 @@ extends Node
 
 @export var time_limit: float = 2  # Time limit for takeover
 var takeover_timer: float = 0.0
+var level_timer: float = 0.0 
 var takeover_in_progress: bool = false
 var on_fail_callback: Callable  # A callback function to call on failure
 var on_win_callback: Callable
 
+
+
 @onready var time_label: Label = $TimeLabel
+@onready var level_time_label: Label = $LevelTimeLabel
 @onready var game_label: Label = $GameLabel
 @onready var instruction_label: Label = $InstructionLabel
 	
 # Called every frame
 func _process(delta: float) -> void:
+	
 	if takeover_in_progress:
 		time_label.text = "Time left: " + str(snapped(takeover_timer, 0.01))
 		takeover_timer -= delta
 		
+		level_time_label.text = "Time: " + str(snapped(level_timer, 0.01))
+		level_timer += delta
+		
+
 		var takeable_objects = get_tree().get_nodes_in_group("takeable")
 		if takeable_objects.size() == 0:
 			on_win_callback.call()

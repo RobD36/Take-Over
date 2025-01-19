@@ -54,6 +54,20 @@ theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
 theme_override_font_sizes/font_size = 18
 text = "Time left: -"
 
+[node name="LevelTimeLabel" type="Label" parent="GameManager"]
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = 141.0
+offset_top = 1.0
+offset_right = 268.0
+offset_bottom = 27.0
+grow_horizontal = 2
+theme_override_colors/font_color = Color(1, 0, 0, 1)
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/font_size = 18
+text = "Time: -"
+
 [node name="GameLabel" type="Label" parent="GameManager"]
 anchors_preset = 8
 anchor_left = 0.5
