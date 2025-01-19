@@ -1,0 +1,18 @@
+[gd_scene load_steps=5 format=3 uid="uid://dgur4xapxom3n"]
+
+[ext_resource type="Script" path="res://Scripts/takeableCharacter.gd" id="1_qor55"]
+[ext_resource type="Material" uid="uid://ce7mswl08igl0" path="res://Assets/orange.tres" id="2_oasdg"]
+
+[sub_resource type="CapsuleMesh" id="CapsuleMesh_jnh1v"]
+
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_kxjix"]
+
+[node name="TakeableCharacter" type="CharacterBody3D" groups=["takeable"]]
+script = ExtResource("1_qor55")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+material_override = ExtResource("2_oasdg")
+mesh = SubResource("CapsuleMesh_jnh1v")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+shape = SubResource("CapsuleShape3D_kxjix")
