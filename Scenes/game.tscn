@@ -1,4 +1,4 @@
-[gd_scene load_steps=15 format=3 uid="uid://cfjqiqqt10fbn"]
+[gd_scene load_steps=13 format=3 uid="uid://cfjqiqqt10fbn"]
 
 [ext_resource type="PackedScene" uid="uid://cxrmmb0futad2" path="res://Scenes/player.tscn" id="1_08ioj"]
 [ext_resource type="Script" path="res://Scripts/gameManager.gd" id="1_8rkey"]
@@ -6,6 +6,13 @@
 [ext_resource type="FontFile" uid="uid://cti0mu4280iuj" path="res://fonts/PixelOperator8-Bold.ttf" id="2_uh63p"]
 [ext_resource type="FontFile" uid="uid://cix58jk10u8o1" path="res://fonts/PixelOperator8.ttf" id="3_02g5t"]
 [ext_resource type="Material" uid="uid://bdo6qj353f2ju" path="res://Assets/white.tres" id="3_66nam"]
+[ext_resource type="PackedScene" uid="uid://bg6vvvetwrk5i" path="res://Scenes/Level Objects/floor.tscn" id="5_r7w46"]
+
+[sub_resource type="BoxMesh" id="BoxMesh_jusfb"]
+size = Vector3(1, 2, 10)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_kygi2"]
+size = Vector3(1, 2, 10)
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_dtxpq"]
 sky_top_color = Color(0.0362574, 0.473621, 0.724044, 1)
@@ -20,20 +27,6 @@ sky_material = SubResource("ProceduralSkyMaterial_dtxpq")
 background_mode = 2
 background_color = Color(0.522011, 1, 0.911207, 1)
 sky = SubResource("Sky_uste6")
-
-[sub_resource type="BoxShape3D" id="BoxShape3D_yjrwm"]
-size = Vector3(25, 1, 25)
-
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_vrdw7"]
-
-[sub_resource type="BoxMesh" id="BoxMesh_18llk"]
-material = SubResource("StandardMaterial3D_vrdw7")
-
-[sub_resource type="BoxMesh" id="BoxMesh_jusfb"]
-size = Vector3(1, 2, 10)
-
-[sub_resource type="BoxShape3D" id="BoxShape3D_kygi2"]
-size = Vector3(1, 2, 10)
 
 [node name="Game" type="Node3D"]
 
@@ -89,95 +82,70 @@ theme_override_fonts/font = ExtResource("3_02g5t")
 
 [node name="World" type="Node" parent="."]
 
+[node name="Level" type="Node3D" parent="World"]
+
+[node name="Wall" type="MeshInstance3D" parent="World/Level"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3.01515, 0.304242, 7.51648)
+material_override = ExtResource("3_66nam")
+mesh = SubResource("BoxMesh_jusfb")
+skeleton = NodePath("../../..")
+
+[node name="StaticBody3D" type="StaticBody3D" parent="World/Level/Wall"]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="World/Level/Wall/StaticBody3D"]
+shape = SubResource("BoxShape3D_kygi2")
+
+[node name="Wall2" type="MeshInstance3D" parent="World/Level"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3.01515, 3.69496, 7.51648)
+material_override = ExtResource("3_66nam")
+mesh = SubResource("BoxMesh_jusfb")
+skeleton = NodePath("../../..")
+
+[node name="StaticBody3D" type="StaticBody3D" parent="World/Level/Wall2"]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="World/Level/Wall2/StaticBody3D"]
+shape = SubResource("BoxShape3D_kygi2")
+
+[node name="Wall3" type="MeshInstance3D" parent="World/Level"]
+transform = Transform3D(-4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, 7.5078, 0.304242, 2.45448)
+material_override = ExtResource("3_66nam")
+mesh = SubResource("BoxMesh_jusfb")
+skeleton = NodePath("../../..")
+
+[node name="StaticBody3D" type="StaticBody3D" parent="World/Level/Wall3"]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="World/Level/Wall3/StaticBody3D"]
+shape = SubResource("BoxShape3D_kygi2")
+
+[node name="Wall4" type="MeshInstance3D" parent="World/Level"]
+transform = Transform3D(-4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, 7.5078, 3.69496, 2.45448)
+material_override = ExtResource("3_66nam")
+mesh = SubResource("BoxMesh_jusfb")
+skeleton = NodePath("../../..")
+
+[node name="StaticBody3D" type="StaticBody3D" parent="World/Level/Wall4"]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="World/Level/Wall4/StaticBody3D"]
+shape = SubResource("BoxShape3D_kygi2")
+
+[node name="Floor5" parent="World/Level" instance=ExtResource("5_r7w46")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -35, 0, -35)
+
+[node name="Floor6" parent="World/Level" instance=ExtResource("5_r7w46")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -35, 0, 0)
+
+[node name="Floor7" parent="World/Level" instance=ExtResource("5_r7w46")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0)
+
+[node name="Floor8" parent="World/Level" instance=ExtResource("5_r7w46")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -35)
+
 [node name="WorldEnvironment" type="WorldEnvironment" parent="World"]
 environment = SubResource("Environment_qj6pq")
 
 [node name="DirectionalLight3D" type="DirectionalLight3D" parent="World"]
 transform = Transform3D(1, 0, 0, 0, 0.354569, 0.93503, 0, -0.93503, 0.354569, 0, 11.5265, 0)
 shadow_enabled = true
-
-[node name="Floor" type="StaticBody3D" parent="World"]
-
-[node name="CollisionShape3D" type="CollisionShape3D" parent="World/Floor"]
-shape = SubResource("BoxShape3D_yjrwm")
-
-[node name="MeshInstance3D" type="MeshInstance3D" parent="World/Floor/CollisionShape3D"]
-transform = Transform3D(25, 0, 0, 0, 1, 0, 0, 0, 25, 0, 0, 0)
-mesh = SubResource("BoxMesh_18llk")
-
-[node name="Floor2" type="StaticBody3D" parent="World"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -38.608, 0, 0)
-
-[node name="CollisionShape3D" type="CollisionShape3D" parent="World/Floor2"]
-shape = SubResource("BoxShape3D_yjrwm")
-
-[node name="MeshInstance3D" type="MeshInstance3D" parent="World/Floor2/CollisionShape3D"]
-transform = Transform3D(25, 0, 0, 0, 1, 0, 0, 0, 25, 0, 0, 0)
-mesh = SubResource("BoxMesh_18llk")
-
-[node name="Floor3" type="StaticBody3D" parent="World"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -38.608, 0, -33.3433)
-
-[node name="CollisionShape3D" type="CollisionShape3D" parent="World/Floor3"]
-shape = SubResource("BoxShape3D_yjrwm")
-
-[node name="MeshInstance3D" type="MeshInstance3D" parent="World/Floor3/CollisionShape3D"]
-transform = Transform3D(25, 0, 0, 0, 1, 0, 0, 0, 25, 0, 0, 0)
-mesh = SubResource("BoxMesh_18llk")
-
-[node name="Floor4" type="StaticBody3D" parent="World"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -4.26185, 0, -33.3433)
-
-[node name="CollisionShape3D" type="CollisionShape3D" parent="World/Floor4"]
-shape = SubResource("BoxShape3D_yjrwm")
-
-[node name="MeshInstance3D" type="MeshInstance3D" parent="World/Floor4/CollisionShape3D"]
-transform = Transform3D(25, 0, 0, 0, 1, 0, 0, 0, 25, 0, 0, 0)
-mesh = SubResource("BoxMesh_18llk")
-
-[node name="Wall" type="MeshInstance3D" parent="World"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3.01515, 0.304242, 7.51648)
-material_override = ExtResource("3_66nam")
-mesh = SubResource("BoxMesh_jusfb")
-skeleton = NodePath("../..")
-
-[node name="StaticBody3D" type="StaticBody3D" parent="World/Wall"]
-
-[node name="CollisionShape3D" type="CollisionShape3D" parent="World/Wall/StaticBody3D"]
-shape = SubResource("BoxShape3D_kygi2")
-
-[node name="Wall2" type="MeshInstance3D" parent="World"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3.01515, 3.69496, 7.51648)
-material_override = ExtResource("3_66nam")
-mesh = SubResource("BoxMesh_jusfb")
-skeleton = NodePath("../..")
-
-[node name="StaticBody3D" type="StaticBody3D" parent="World/Wall2"]
-
-[node name="CollisionShape3D" type="CollisionShape3D" parent="World/Wall2/StaticBody3D"]
-shape = SubResource("BoxShape3D_kygi2")
-
-[node name="Wall3" type="MeshInstance3D" parent="World"]
-transform = Transform3D(-4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, 7.5078, 0.304242, 2.45448)
-material_override = ExtResource("3_66nam")
-mesh = SubResource("BoxMesh_jusfb")
-skeleton = NodePath("../..")
-
-[node name="StaticBody3D" type="StaticBody3D" parent="World/Wall3"]
-
-[node name="CollisionShape3D" type="CollisionShape3D" parent="World/Wall3/StaticBody3D"]
-shape = SubResource("BoxShape3D_kygi2")
-
-[node name="Wall4" type="MeshInstance3D" parent="World"]
-transform = Transform3D(-4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, 7.5078, 3.69496, 2.45448)
-material_override = ExtResource("3_66nam")
-mesh = SubResource("BoxMesh_jusfb")
-skeleton = NodePath("../..")
-
-[node name="StaticBody3D" type="StaticBody3D" parent="World/Wall4"]
-
-[node name="CollisionShape3D" type="CollisionShape3D" parent="World/Wall4/StaticBody3D"]
-shape = SubResource("BoxShape3D_kygi2")
 
 [node name="TakeableCharacter" parent="World" instance=ExtResource("2_gjfkg")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -7.09023, 3.00531, -28.5117)
